@@ -1,6 +1,20 @@
 # money_tracker
 
-A new Flutter project.
+A Flutter project to track daily personal money movements on your phone!
+
+## Uses
+
+Based on the ideas of this page: https://www.geeksforgeeks.org/flutter-projects-with-source-code/
+
+An optimized mobile application for tracking daily expenses and also helps to manage financial stuff. A perfect source code that can help beginner to experienced Flutter app developers to learn various Flutter concepts such as custom widget creation, API calls, and local data storage. This project is the perfect resource for beautiful UI designs and easy navigation flow.
+
+-- Key Features of MMAS Money Tracker
+-- Easy daily expense manager
+-- Reports on expense VS income
+-- Manage expenses by category
+-- Multi-language support
+-- Multi-currency support
+-- Local storage support 
 
 ## Getting Started
 

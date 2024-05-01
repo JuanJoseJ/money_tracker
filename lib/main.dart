@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:money_tracker/main_scaffold.dart';
+import 'package:money_tracker/provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => MainProvider(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,4 +23,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

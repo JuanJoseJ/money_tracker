@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:money_tracker/pages/data_page.dart';
-import 'package:money_tracker/pages/home_page.dart';
+import 'package:money_tracker/pages/graphs/data_page.dart';
+import 'package:money_tracker/pages/home/home_page.dart';
 
 class MyNavigator extends StatelessWidget {
   const MyNavigator({
     super.key,
-    required GlobalKey<NavigatorState> navigatorKey,
-  }) : _navigatorKey = navigatorKey;
+    required this.navigatorKey,
+  });
 
-  final GlobalKey<NavigatorState> _navigatorKey;
+  final GlobalKey<NavigatorState> navigatorKey;
 
   @override
   Widget build(BuildContext context) {
     return Navigator(
-      key: _navigatorKey,
+      key: navigatorKey,
       onGenerateRoute: (settings) {
         WidgetBuilder builder;
         switch (settings.name) {
           case '/':
-            builder = (BuildContext context) => const HomePage();
+            builder = (BuildContext context) => HomePage();
             break;
           case '/business':
             builder = (BuildContext context) => const BusinessPage();

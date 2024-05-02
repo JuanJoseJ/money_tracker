@@ -24,7 +24,7 @@ void showAddMoneyMovementBottomSheet(BuildContext context) {
       IconData selectedIcon = Icons.home;
       List<IconData> iconsList = iconsListSample;
 
-      bool validateForm(StateSetter setState) {
+      bool validateForm() {
         bool isValid = true;
 
         if (nameController.text.isEmpty) {
@@ -41,8 +41,6 @@ void showAddMoneyMovementBottomSheet(BuildContext context) {
         } else {
           amountErrorText = null;
         }
-
-        setState(() {});
 
         return isValid;
       }
@@ -143,7 +141,7 @@ void showAddMoneyMovementBottomSheet(BuildContext context) {
                     TextButton(
                       child: const Text("Add"),
                       onPressed: () {
-                        if (validateForm(setState)) {
+                        if (validateForm()) {
                           // nameController.clear();
                           // amountController.clear();
                           // descriptionController.clear();
@@ -155,10 +153,8 @@ void showAddMoneyMovementBottomSheet(BuildContext context) {
                               amount: double.tryParse(amountController.text)!,
                               monetaryUnit: selectedCurrency);
 
-                          provider.updateMovements(
-                              [...provider.movements, newMovement]);
+                          provider.addMovement(newMovement);
 
-                          // Optionally, close the modal
                           Navigator.of(context).pop();
                         }
                       },

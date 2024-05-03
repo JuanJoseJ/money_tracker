@@ -24,6 +24,8 @@ void showAddMoneyMovementBottomSheet(BuildContext context) {
       IconData selectedIcon = Icons.home;
       List<IconData> iconsList = iconsListSample;
 
+      DateTime selectedDate = DateTime.now();
+
       bool validateForm() {
         bool isValid = true;
 
@@ -58,23 +60,41 @@ void showAddMoneyMovementBottomSheet(BuildContext context) {
                     errorText: nameErrorText,
                   ),
                 ),
-                DropdownButtonFormField<MovementType>(
-                  decoration: const InputDecoration(
-                    labelText: "Type",
-                  ),
-                  isExpanded: true,
-                  value: selectedType,
-                  onChanged: (MovementType? newValue) {
-                    setState(() {
-                      selectedType = newValue!;
-                    });
-                  },
-                  items: MovementType.values.map((MovementType classType) {
-                    return DropdownMenuItem<MovementType>(
-                      value: classType,
-                      child: Text(classType.toString().split('.').last),
-                    );
-                  }).toList(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: DropdownButtonFormField<MovementType>(
+                        decoration: const InputDecoration(
+                          labelText: "Type",
+                        ),
+                        isExpanded: true,
+                        value: selectedType,
+                        onChanged: (MovementType? newValue) {
+                          setState(() {
+                            selectedType = newValue!;
+                          });
+                        },
+                        items:
+                            MovementType.values.map((MovementType classType) {
+                          return DropdownMenuItem<MovementType>(
+                            value: classType,
+                            child: Text(classType.toString().split('.').last),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    Expanded(
+                        child: Padding(
+                      padding: const EdgeInsets.fromLTRB(4, 16, 4, 0),
+                      child: InputDatePickerFormField(
+                        firstDate: DateTime.now()
+                            .subtract(const Duration(days: 99999999999999)),
+                        lastDate: DateTime.now(),
+                        initialDate: selectedDate,
+                      ),
+                    )),
+                  ],
                 ),
                 const TextField(
                   decoration: InputDecoration(
@@ -151,7 +171,8 @@ void showAddMoneyMovementBottomSheet(BuildContext context) {
                               name: nameController.text,
                               movementType: selectedType,
                               amount: double.tryParse(amountController.text)!,
-                              monetaryUnit: selectedCurrency);
+                              monetaryUnit: selectedCurrency,
+                              movementDate: selectedDate);
 
                           provider.addMovement(newMovement);
 

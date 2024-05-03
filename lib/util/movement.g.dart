@@ -24,13 +24,14 @@ class MoneyMovementAdapter extends TypeAdapter<MoneyMovement> {
       description: fields[4] as String?,
       amount: fields[5] as double,
       monetaryUnit: fields[6] as String,
+      movementDate: fields[7] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, MoneyMovement obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class MoneyMovementAdapter extends TypeAdapter<MoneyMovement> {
       ..writeByte(5)
       ..write(obj.amount)
       ..writeByte(6)
-      ..write(obj.monetaryUnit);
+      ..write(obj.monetaryUnit)
+      ..writeByte(7)
+      ..write(obj.movementDate);
   }
 
   @override

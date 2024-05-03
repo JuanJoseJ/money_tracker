@@ -29,7 +29,12 @@ void main() async {
 // a collection in MongoDB. It's a container for storing multiple objects of the same type.
 // Here, 'money_movements' is the name of the box. You must await this operation because
 // opening a box involves I/O operations which are asynchronous.
-  await Hive.openBox<MoneyMovement>('money_movements');
+  try {
+    await Hive.openBox<MoneyMovement>('money_movements');
+    // await Hive.box<MoneyMovement>('money_movements').clear();
+  } catch (e) {
+    print("Error opening or clearing the box: $e");
+  }
 
   runApp(const MyApp());
 }

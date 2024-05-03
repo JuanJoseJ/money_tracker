@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
+// To generate the file run:
+// flutter pub run build_runner build
 part 'movement.g.dart';
 
 @HiveType(typeId: 0)
@@ -26,6 +28,9 @@ class MoneyMovement {
   @HiveField(6)
   final String monetaryUnit;
 
+  @HiveField(7)
+  DateTime? movementDate;
+
   MoneyMovement({
     this.id,
     required this.icon,
@@ -34,6 +39,7 @@ class MoneyMovement {
     this.description,
     required this.amount,
     required this.monetaryUnit,
+     this.movementDate,
   });
 }
 

@@ -31,7 +31,7 @@ class MainScaffoldState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyTopBar(),
+      // appBar: const MyTopBar(),
       bottomNavigationBar: BottomBar(
         selectedIndex: _selectedIndex,
         onItemSelected: _onItemTapped,

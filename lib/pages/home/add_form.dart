@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:money_tracker/provider.dart';
 import 'package:money_tracker/util/icons.dart';
 import 'package:money_tracker/util/movement.dart';
@@ -12,10 +13,12 @@ void showAddMoneyMovementBottomSheet(BuildContext context) {
     builder: (BuildContext context) {
       final TextEditingController nameController = TextEditingController();
       final TextEditingController amountController = TextEditingController();
+      final TextEditingController dateController = TextEditingController();
       // final TextEditingController descriptionController = TextEditingController();
 
       String? nameErrorText;
       String? amountErrorText;
+      String? dateErrorText;
 
       String selectedCurrency = 'USD';
       final List<String> currencies = ['USD', 'EURO', 'COP'];
@@ -44,11 +47,40 @@ void showAddMoneyMovementBottomSheet(BuildContext context) {
           amountErrorText = null;
         }
 
+        if (dateController.text.isEmpty) {
+          nameErrorText = "A date is required";
+          isValid = false;
+        } else {
+          nameErrorText = null;
+        }
+
         return isValid;
       }
 
       return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
+          Future<void> selectDate(BuildContext context) async {
+            DateTime initialDate = DateTime.now();
+            DateTime firstDate = DateTime(initialDate.year);
+
+            final DateTime? picked = await showDatePicker(
+              context: context,
+              initialDate: initialDate,
+              firstDate: firstDate,
+              lastDate: initialDate,
+            );
+
+            if (picked != null && picked != initialDate) {
+              dateController.text =
+                  DateFormat('yyy-MM-dd').format(picked).toString();
+              setState(
+                () {
+                  selectedDate = picked;
+                },
+              );
+            }
+          }
+
           return Container(
             padding: const EdgeInsets.all(20.0),
             child: Wrap(
@@ -86,12 +118,17 @@ void showAddMoneyMovementBottomSheet(BuildContext context) {
                     ),
                     Expanded(
                         child: Padding(
-                      padding: const EdgeInsets.fromLTRB(4, 16, 4, 0),
-                      child: InputDatePickerFormField(
-                        firstDate: DateTime.now()
-                            .subtract(const Duration(days: 99999999999999)),
-                        lastDate: DateTime.now(),
-                        initialDate: selectedDate,
+                      padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                      child: TextField(
+                        controller: dateController,
+                        decoration: InputDecoration(
+                          labelText: "Date",
+                          errorText: dateErrorText,
+                        ),
+                        onTap: () => selectDate(context),
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
+                        readOnly: true,
                       ),
                     )),
                   ],

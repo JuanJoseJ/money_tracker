@@ -14,6 +14,7 @@ Features of the Money Tracker:
 - Multi-language support
 - Multi-currency support
 - Local storage support 
+- profile to manage local configurations
 
 ## Getting Started
 

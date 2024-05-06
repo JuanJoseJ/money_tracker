@@ -20,6 +20,9 @@ class MyNavigator extends StatelessWidget {
           case '/':
             builder = (BuildContext context) => HomePage();
             break;
+          case '/profile':
+            builder = (BuildContext context) => HomePage();
+            break;
           case '/business':
             builder = (BuildContext context) => const BusinessPage();
             break;

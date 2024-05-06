@@ -9,20 +9,26 @@ class MovementsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MainProvider provider = Provider.of<MainProvider>(context);
-    List<MoneyMovement> movements = provider.movements;
     DateTime selectedDate = provider.selectedDate;
-    return ListView.builder(
-      itemCount: movements.length,
-      itemBuilder: (context, index) {
-        DateTime tomorrowDate = selectedDate.add(const Duration(days: 1));
-        if (movements[index].movementDate.isAtSameMomentAs(selectedDate) ||
-            (movements[index].movementDate.isAfter(selectedDate) &&
-                movements[index].movementDate.isBefore(tomorrowDate))) {
+    DateTime tomorrowDate = selectedDate.add(const Duration(days: 1));
+    List<MoneyMovement> movements = provider.movements
+        .where((element) =>
+            element.movementDate.isAtSameMomentAs(selectedDate) ||
+            (element.movementDate.isAfter(selectedDate) &&
+                element.movementDate.isBefore(tomorrowDate)))
+        .toList();
+    if (movements.isEmpty) {
+      return const Center(
+        child: Text("No Movements registered"),
+      );
+    } else {
+      return ListView.builder(
+        itemCount: movements.length,
+        itemBuilder: (context, index) {
           return MoneyMovementTile(movement: movements[index]);
-        }
-        return null;
-      },
-    );
+        },
+      );
+    }
   }
 }
 

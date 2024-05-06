@@ -23,8 +23,7 @@ class _MyTopBarState extends State<MyTopBar> {
 
     Future<void> selectDate(BuildContext context) async {
       DateTime initialDate = selectedDate;
-      DateTime firstDate =
-          initialDate.subtract(const Duration(days: 9999));
+      DateTime firstDate = initialDate.subtract(const Duration(days: 9999));
 
       final DateTime? picked = await showDatePicker(
         context: context,
@@ -43,7 +42,7 @@ class _MyTopBarState extends State<MyTopBar> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
                 DateTime newDate =
                     selectedDate.subtract(const Duration(hours: 24));
@@ -51,16 +50,16 @@ class _MyTopBarState extends State<MyTopBar> {
               }),
           Expanded(
               child: GestureDetector(
-                onTap: () => selectDate(context),
-                child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+            onTap: () => selectDate(context),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
                 Text(DateFormat("dd-MMMM-yyyy").format(selectedDate)),
-                          ],
-                        ),
-              )),
+              ],
+            ),
+          )),
           IconButton(
-              icon: Icon(Icons.arrow_forward_ios),
+              icon: const Icon(Icons.arrow_forward_ios),
               onPressed: () {
                 DateTime newDate = selectedDate.add(const Duration(hours: 24));
                 DateTime now = DateTime(DateTime.now().year,
@@ -71,6 +70,14 @@ class _MyTopBarState extends State<MyTopBar> {
               }),
         ],
       ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
+          child: IconButton(icon: Icon(Icons.tune), onPressed: () {
+            // Navigator.of(context).push();
+          }),
+        )
+      ],
     );
   }
 }

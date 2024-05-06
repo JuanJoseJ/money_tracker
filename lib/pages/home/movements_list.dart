@@ -8,12 +8,19 @@ class MovementsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<MoneyMovement> movements =
-        Provider.of<MainProvider>(context).movements;
+    MainProvider provider = Provider.of<MainProvider>(context);
+    List<MoneyMovement> movements = provider.movements;
+    DateTime selectedDate = provider.selectedDate;
     return ListView.builder(
       itemCount: movements.length,
       itemBuilder: (context, index) {
-        return MoneyMovementTile(movement: movements[index]);
+        DateTime tomorrowDate = selectedDate.add(const Duration(days: 1));
+        if (movements[index].movementDate.isAtSameMomentAs(selectedDate) ||
+            (movements[index].movementDate.isAfter(selectedDate) &&
+                movements[index].movementDate.isBefore(tomorrowDate))) {
+          return MoneyMovementTile(movement: movements[index]);
+        }
+        return null;
       },
     );
   }
@@ -60,7 +67,7 @@ class MoneyMovementTile extends StatelessWidget {
           children: [
             Text('${movement.monetaryUnit} ${movement.amount.toString()}'),
             Text(
-                '${movement.movementDate!.day}/${movement.movementDate!.month}/${movement.movementDate!.year}'),
+                '${movement.movementDate.day}/${movement.movementDate.month}/${movement.movementDate.year}'),
           ],
         ),
         trailing: Text(movement.movementType == MovementType.income

@@ -29,7 +29,7 @@ class MoneyMovement {
   final String monetaryUnit;
 
   @HiveField(7)
-  DateTime? movementDate;
+  DateTime movementDate;
 
   MoneyMovement({
     this.id,
@@ -39,7 +39,7 @@ class MoneyMovement {
     this.description,
     required this.amount,
     required this.monetaryUnit,
-     this.movementDate,
+    required this.movementDate,
   });
 }
 

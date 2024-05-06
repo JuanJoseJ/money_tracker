@@ -27,7 +27,10 @@ void showAddMoneyMovementBottomSheet(BuildContext context) {
       IconData selectedIcon = Icons.home;
       List<IconData> iconsList = iconsListSample;
 
-      DateTime selectedDate = DateTime.now();
+      DateTime selectedDate = provider.selectedDate;
+
+      dateController.text = dateController.text =
+          DateFormat('dd-MM-yyyy').format(selectedDate).toString();
 
       bool validateForm() {
         bool isValid = true;
@@ -60,19 +63,20 @@ void showAddMoneyMovementBottomSheet(BuildContext context) {
       return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
           Future<void> selectDate(BuildContext context) async {
-            DateTime initialDate = DateTime.now();
-            DateTime firstDate = DateTime(initialDate.year);
+            DateTime initialDate = selectedDate;
+            DateTime firstDate =
+                initialDate.subtract(const Duration(days: 9999));
 
             final DateTime? picked = await showDatePicker(
               context: context,
               initialDate: initialDate,
               firstDate: firstDate,
-              lastDate: initialDate,
+              lastDate: DateTime.now(),
             );
 
             if (picked != null && picked != initialDate) {
               dateController.text =
-                  DateFormat('yyy-MM-dd').format(picked).toString();
+                  DateFormat('dd-MM-yyyy').format(picked).toString();
               setState(
                 () {
                   selectedDate = picked;

@@ -24,7 +24,7 @@ class MoneyMovementAdapter extends TypeAdapter<MoneyMovement> {
       description: fields[4] as String?,
       amount: fields[5] as double,
       monetaryUnit: fields[6] as String,
-      movementDate: fields[7] as DateTime?,
+      movementDate: fields[7] as DateTime,
     );
   }
 

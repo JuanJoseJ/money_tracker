@@ -21,7 +21,7 @@ class MainProvider extends ChangeNotifier {
   Future<void> addMovement(MoneyMovement movement) async {
     var key = await _box!.add(movement);
     print("KEY ${key}");
-    movement.id = key; 
+    movement.id = key;
     _movements.add(movement);
     notifyListeners();
   }
@@ -46,6 +46,14 @@ class MainProvider extends ChangeNotifier {
     await _box!.delete(movement.id);
     _movements.removeWhere((m) => m.id == movement.id);
     print("DELETE MOVEMENT");
+    notifyListeners();
+  }
+
+  DateTime _selectedDate =
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+  DateTime get selectedDate => _selectedDate;
+  void updateSelectedDate(DateTime newDate) {
+    _selectedDate = newDate;
     notifyListeners();
   }
 

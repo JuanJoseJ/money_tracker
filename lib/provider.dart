@@ -20,6 +20,7 @@ class MainProvider extends ChangeNotifier {
 
   Future<void> addMovement(MoneyMovement movement) async {
     var key = await _box!.add(movement);
+    print("KEY ${key}");
     movement.id = key; 
     _movements.add(movement);
     notifyListeners();
@@ -39,10 +40,12 @@ class MainProvider extends ChangeNotifier {
 
   Future<void> deleteMovement(MoneyMovement movement) async {
     if (movement.id == null) {
+      print("ID NULL. MOVEMNT: ${movement}");
       return;
     }
     await _box!.delete(movement.id);
     _movements.removeWhere((m) => m.id == movement.id);
+    print("DELETE MOVEMENT");
     notifyListeners();
   }
 

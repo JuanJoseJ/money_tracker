@@ -24,21 +24,49 @@ class MoneyMovementTile extends StatelessWidget {
 
   const MoneyMovementTile({Key? key, required this.movement}) : super(key: key);
 
+  void showConfirmationDialog(BuildContext context) async {
+    final provider = Provider.of<MainProvider>(context, listen: false);
+    return await showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: Text("Are you sure you want to delete this register?"),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('CANCEL'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: Text('ACCEPT'),
+                  onPressed: () {
+                    provider.deleteMovement(movement);
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(movement.icon),
-      title: Text(movement.name),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('${movement.monetaryUnit} ${movement.amount.toString()}'),
-          Text(
-              '${movement.movementDate!.day}/${movement.movementDate!.month}/${movement.movementDate!.year}'),
-        ],
+    return GestureDetector(
+      onLongPress: () => showConfirmationDialog(context),
+      child: ListTile(
+        leading: Icon(movement.icon),
+        title: Text(movement.name),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('${movement.monetaryUnit} ${movement.amount.toString()}'),
+            Text(
+                '${movement.movementDate!.day}/${movement.movementDate!.month}/${movement.movementDate!.year}'),
+          ],
+        ),
+        trailing: Text(movement.movementType == MovementType.income
+            ? 'Income'
+            : 'Expense'),
       ),
-      trailing: Text(
-          movement.movementType == MovementType.income ? 'Income' : 'Expense'),
     );
   }
 }

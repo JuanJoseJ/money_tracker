@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_tracker/navigator.dart';
 import 'package:money_tracker/scaffold_components/bottom_bar.dart';
-import 'package:money_tracker/scaffold_components/top_bar.dart';
 
 class MainScaffold extends StatefulWidget {
   const MainScaffold({super.key});

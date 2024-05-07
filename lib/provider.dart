@@ -1,12 +1,13 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:money_tracker/util/movement.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainProvider extends ChangeNotifier {
   Box<MoneyMovement>? _box;
   List<MoneyMovement> _movements = [];
 
-  MainProvider() {
+  MainProvider(this._themeData) {
     _init();
   }
 
@@ -54,6 +55,24 @@ class MainProvider extends ChangeNotifier {
   DateTime get selectedDate => _selectedDate;
   void updateSelectedDate(DateTime newDate) {
     _selectedDate = newDate;
+    notifyListeners();
+  }
+
+  ThemeData _themeData;
+
+  ThemeData get themeData => _themeData;
+
+  setThemeData(ThemeData themeData) async {
+    _themeData = themeData;
+    notifyListeners();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkTheme', themeData.brightness == Brightness.dark);
+  }
+
+  Future<void> loadThemeData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isDarkTheme = prefs.getBool('isDarkTheme') ?? false;
+    _themeData = isDarkTheme ? ThemeData.dark() : ThemeData.light();
     notifyListeners();
   }
 

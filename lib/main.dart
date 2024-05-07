@@ -37,7 +37,19 @@ void main() async {
     print("Error opening or clearing the box: $e");
   }
 
-  runApp(MyApp());
+  ThemeData initialTheme = ThemeData(
+    colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+    useMaterial3: true,
+  );
+  MainProvider themeProvider = MainProvider(initialTheme);
+  await themeProvider.loadThemeData();
+
+  runApp(
+    ChangeNotifierProvider<MainProvider>.value(
+      value: themeProvider,
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -48,21 +60,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MainProvider(),
-      child: MaterialApp(
-        title: 'Money Tracker',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
-          useMaterial3: true,
-        ),
-        navigatorKey: _mainNavigatorKey,
-        routes: <String, WidgetBuilder>{
-          '/': (context) => const MainScaffold(),
-          '/settings': (context) => SettingsPage(),
-        },
-        initialRoute: '/',
-      ),
+    final provider = Provider.of<MainProvider>(context);
+
+    return MaterialApp(
+      title: 'Money Tracker',
+      theme: provider.themeData,
+      navigatorKey: _mainNavigatorKey,
+      routes: <String, WidgetBuilder>{
+        '/': (context) => const MainScaffold(),
+        '/settings': (context) => SettingsPage(),
+      },
+      initialRoute: '/',
     );
   }
 }

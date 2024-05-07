@@ -73,9 +73,11 @@ class _MyTopBarState extends State<MyTopBar> {
       actions: [
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
-          child: IconButton(icon: Icon(Icons.tune), onPressed: () {
-            // Navigator.of(context).push();
-          }),
+          child: IconButton(
+              icon: Icon(Icons.tune),
+              onPressed: () {
+                Navigator.pushNamed(context, '/settings');
+              }),
         )
       ],
     );

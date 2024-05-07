@@ -4,26 +4,26 @@ class BottomBar extends StatefulWidget {
   final int selectedIndex;
   final Function(int) onItemSelected;
 
-  const BottomBar({Key? key, required this.selectedIndex, required this.onItemSelected}) : super(key: key);
+  const BottomBar(
+      {Key? key, required this.selectedIndex, required this.onItemSelected})
+      : super(key: key);
 
   @override
   State<BottomBar> createState() => _BottomBarState();
 }
 
 class _BottomBarState extends State<BottomBar> {
-  
-
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'Home',
+          label: 'List',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.business),
-          label: 'Business',
+          label: 'Graphs',
         ),
       ],
       currentIndex: widget.selectedIndex,

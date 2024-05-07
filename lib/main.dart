@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:money_tracker/main_scaffold.dart';
+import 'package:money_tracker/pages/settings/settings_page.dart';
 import 'package:money_tracker/provider.dart';
 import 'package:money_tracker/util/movement.dart';
 import 'package:provider/provider.dart';
@@ -36,11 +37,14 @@ void main() async {
     print("Error opening or clearing the box: $e");
   }
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final GlobalKey<NavigatorState> _mainNavigatorKey =
+      GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,12 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
           useMaterial3: true,
         ),
-        home: const MainScaffold(),
+        navigatorKey: _mainNavigatorKey,
+        routes: <String, WidgetBuilder>{
+          '/': (context) => const MainScaffold(),
+          '/settings': (context) => SettingsPage(),
+        },
+        initialRoute: '/',
       ),
     );
   }

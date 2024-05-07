@@ -23,7 +23,7 @@ class MainScaffoldState extends State {
         _navigatorKey.currentState!.pushNamed('/');
         break;
       case 1:
-        _navigatorKey.currentState!.pushNamed('/business');
+        _navigatorKey.currentState!.pushNamed('/graphs');
         break;
     }
   }

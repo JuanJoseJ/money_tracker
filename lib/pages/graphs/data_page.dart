@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class BusinessPage extends StatelessWidget {
-  const BusinessPage({super.key});
+class GraphsPage extends StatelessWidget {
+  const GraphsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Business Page'));
+    return Center(child: Text('Graphs Page'));
   }
 }

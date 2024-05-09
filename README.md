@@ -5,7 +5,6 @@ Money Tracker is a comprehensive Flutter application designed to help users effi
 ## Features
 
 - **Daily Expense Management**: Log and manage daily expenses with ease.
-- **Income vs. Expense Reports**: Visualize your financial health with detailed reports.
 - **Multi-Currency Support**: Cater to global users with multiple currency options.
 - **Local Storage**: Ensures user data is stored safely on the device.
 - **User Settings**: Manage settings and configurations easily.
@@ -58,6 +57,7 @@ We welcome contributions to the Money Tracker! Here's how you can contribute:
 
 ## Future Features
 
+- **Income vs. Expense Reports**: Visualize your financial health with detailed reports.
 - **Budget Planning**: Tools to set and manage monthly budgets.
 - **Cloud Sync**: Option to backup and sync data across multiple devices.
 - **Custom Alerts**: Set alerts for budget limits and bill payments.
@@ -72,8 +72,6 @@ In developing this project, we integrated several key Flutter packages to enhanc
 - **Shared Preferences**: Used for storing simple data persistently across app launches, ideal for saving user preferences and settings.
 
 ## Gallery
-
-To add a visual touch, here are some screenshots of the app. Adjust the width and height as needed to fit your design better.
 
 <p align="center">
   <img src="./static/pictures/List-Light.jpg" alt="Home Screen Light" width="200"/>

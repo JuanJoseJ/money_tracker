@@ -73,11 +73,11 @@ In developing this project, we integrated several key Flutter packages to enhanc
 
 ## Gallery
 
-To add a visual touch, include screenshots of your app. You can upload images to a cloud storage service and link them here using Markdown:
+To add a visual touch, here are some screenshots of the app. Adjust the width and height as needed to fit your design better.
 
-![Home Screen Light](./static/pictures/List-Light.jpg)
-
-![Home Screen Dark](./static/pictures/List-Dark.jpg)
-
-![Form Dark](./static/pictures/Form.jpg)
+<p align="center">
+  <img src="./static/pictures/List-Light.jpg" alt="Home Screen Light" width="200"/>
+  <img src="./static/pictures/List-Dark.jpg" alt="Home Screen Dark" width="200"/>
+  <img src="./static/pictures/Form.jpg" alt="Form Dark" width="200"/>
+</p>
 

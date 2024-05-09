@@ -10,7 +10,7 @@ class MyNavigator extends StatelessWidget {
 
   final GlobalKey<NavigatorState> navigatorKey;
 
-  // The use of a navigator in the body of the scaffold allows us to set a methid
+  // The use of a navigator in the body of the scaffold allows us to set a method
   // to navigate down this point, separate to the one used in the material app. A
   // navigatorKey is defined directly in the scaffold so that it can be used inside
   // the bottom bar navigation, which is not directly under the navigator widget.

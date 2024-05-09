@@ -72,7 +72,7 @@ class MainProvider extends ChangeNotifier {
   Future<void> loadThemeData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool isDarkTheme = prefs.getBool('isDarkTheme') ?? false;
-    _themeData = isDarkTheme ? ThemeData.dark() : ThemeData.light();
+    _themeData = isDarkTheme ? ThemeData.dark(useMaterial3: true) : _themeData;
     notifyListeners();
   }
 
